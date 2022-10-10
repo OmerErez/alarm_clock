@@ -1,1 +1,4 @@
-BASE_URL = 'http://localhost/alarm'
+SERVER_HOST = 'localhost'
+SERVER_PORT = 80
+BASE_SERVER = f"http://{SERVER_HOST}:{SERVER_PORT}"
+BASE_ALARM_URL = f'{BASE_SERVER}/alarm'

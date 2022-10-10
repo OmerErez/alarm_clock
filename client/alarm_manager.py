@@ -1,12 +1,12 @@
 from adapters.alarm_adapter import AlarmAdapter
 from models.alarm import Alarm
 from client.server_communicator import ServerCommunicator
-from client.consts import BASE_URL
+from client.consts import BASE_ALARM_URL
 
 
 class AlarmManager:
     def __init__(self):
-        self.server_communicator = ServerCommunicator(BASE_URL)
+        self.server_communicator = ServerCommunicator(BASE_ALARM_URL)
 
     def get_all_alarms(self):
         response = self.server_communicator.get("")

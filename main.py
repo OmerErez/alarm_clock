@@ -1,15 +1,14 @@
-import time
 from threading import Thread
-from alarm_server.server import Server
+
 import uvicorn
 
+from alarm_server.server import Server
 from consts import SERVER_PORT, SERVER_HOST
 from notifier.notifier import Notifier
 
 
 def run_server():
-    server = Server()
-    uvicorn.run(app=server.app, host=SERVER_HOST, port=SERVER_PORT)
+    uvicorn.run(app=Server().app, host=SERVER_HOST, port=SERVER_PORT)
 
 
 def run_notifier():
@@ -17,7 +16,9 @@ def run_notifier():
 
 
 if __name__ == '__main__':
-    Thread(target=run_server).start()
-    Thread(target=run_notifier).start()
-    while True:
-        time.sleep(1)
+    server = Thread(target=run_server)
+    notifier = Thread(target=run_notifier)
+    server.start()
+    notifier.start()
+    for thread in [server, notifier]:
+        thread.join()

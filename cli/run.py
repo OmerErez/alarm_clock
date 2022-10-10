@@ -1,5 +1,7 @@
 from copy import deepcopy
 
+import requests
+
 from cli.commands.available_commands import AVAILABLE_COMMANDS
 from cli.commands.help_command import HelpCommand
 
@@ -29,6 +31,8 @@ class CommandLineInterface:
                 print(self.run_command(command))
             except IndexError:
                 print("Command Not Found.")
+            except requests.exceptions.ConnectionError:
+                print("Unable to communicate with alarm server.")
             except Exception as e:
                 print(e)
 
